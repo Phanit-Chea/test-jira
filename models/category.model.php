@@ -31,3 +31,16 @@ function deleteCategory(int $id) : bool
     $statement->execute([':id' => $id]);
     return $statement->rowCount() > 0;
 }
+function updateCategory(string $name, string $description, int $id) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("update categories set name = :name, description = :description where id = :id");
+    $statement->execute([
+        ':name' => $name,
+        ':description' => $description,
+        ':id' => $id
+
+    ]);
+
+    return $statement->rowCount() > 0;
+}
