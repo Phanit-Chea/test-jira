@@ -17,3 +17,10 @@ function createCategory(string $name, string $description) : bool
 
     return $statement->rowCount() > 0;
 }
+function getCategory(int $id)
+{
+    global $connection;
+    $statement = $connection->prepare("select * from categories where id = :id");
+    $statement->execute([':id' => $id]);
+    return $statement->fetch();
+}
